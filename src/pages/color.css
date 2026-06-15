@@ -1,0 +1,232 @@
+/* ===== RESET ===== */
+* {
+  box-sizing: border-box;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f6f7fb;
+  color: #111827;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.home-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 26px;
+}
+
+/* ===== HEADER (MODERN GRADIENT CARD) ===== */
+.header {
+  background: linear-gradient(135deg, #6366f1, #3b82f6);
+  color: white;
+  padding: 26px;
+  border-radius: 16px;
+  margin-bottom: 22px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.header p {
+  margin-top: 6px;
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+/* ===== CARD ===== */
+.voucher-card {
+  background: white;
+  padding: 22px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  border: 1px solid #eef0f5;
+}
+
+/* ===== FORM GRID ===== */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+}
+
+/* ===== LABEL ===== */
+label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* ===== INPUTS (SOFT STYLE) ===== */
+.input-field {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 14px;
+  background: #f9fafb;
+  transition: 0.2s;
+  outline: none;
+}
+
+.input-field:focus {
+  background: #fff;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+/* ===== TABLE MODERN ===== */
+.table-wrapper {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.voucher-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.voucher-table th {
+  background: #6366f1;
+  color: white;
+  padding: 12px;
+  font-size: 13px;
+  text-align: left;
+}
+
+.voucher-table td {
+  padding: 12px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 14px;
+}
+
+.voucher-table tr:hover {
+  background: #f8fafc;
+}
+
+/* ===== BUTTONS (MODERN STYLE) ===== */
+.button-group {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.btn {
+  background: #6366f1;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  background: #4f46e5;
+  transform: translateY(-1px);
+}
+
+/* DELETE */
+.delete-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+}
+
+/* CANCEL */
+.cancel-btn {
+  background: #9ca3af;
+}
+
+.cancel-btn:hover {
+  background: #6b7280;
+}
+
+/* ===== TOTAL BOX ===== */
+.total-box {
+  margin-top: 22px;
+  background: white;
+  padding: 18px;
+  border-radius: 16px;
+  text-align: right;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.total-box h2 {
+  color: #6366f1;
+}
+
+/* ===== AUTOCOMPLETE DROPDOWN ===== */
+.autocomplete-box {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  max-height: 220px;
+  overflow-y: auto;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.autocomplete-item {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.autocomplete-item:hover {
+  background: #eef2ff;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .home-container {
+    padding: 14px;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-invoice, #printable-invoice * {
+    visibility: visible;
+  }
+  #printable-invoice {
+    display: block !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: white;
+    color: black;
+  }
+}
