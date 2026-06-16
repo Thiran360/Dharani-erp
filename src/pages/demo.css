@@ -1,0 +1,318 @@
+/* ===== GOOGLE FONT ===== */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #f4f7fc;
+  color: #1e293b;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.home-container {
+  max-width: 1400px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  color: white;
+  padding: 25px 35px;
+  border-radius: 18px;
+  margin-bottom: 25px;
+  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.25);
+}
+
+.header h2 {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.header p {
+  margin-top: 8px;
+  opacity: 0.9;
+  font-size: 14px;
+}
+
+/* ===== CARD ===== */
+.voucher-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 25px;
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+  border: 1px solid #e2e8f0;
+  margin-bottom: 25px;
+}
+
+/* ===== SECTION TITLE ===== */
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e40af;
+  margin-bottom: 18px;
+  border-left: 5px solid #2563eb;
+  padding-left: 10px;
+}
+
+/* ===== FORM GRID ===== */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 18px;
+}
+
+/* ===== LABEL ===== */
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+}
+
+/* ===== INPUTS ===== */
+.input-field,
+select,
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 14px;
+  background: #fff;
+  transition: 0.3s ease;
+}
+
+.input-field:focus,
+select:focus,
+textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+  outline: none;
+}
+
+/* ===== TABLE ===== */
+.table-wrapper {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.voucher-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 15px;
+  overflow: hidden;
+  background: white;
+}
+
+.voucher-table thead {
+  background: #1e3a8a;
+}
+
+.voucher-table th {
+  color: white;
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.voucher-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.voucher-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.voucher-table input {
+  width: 100%;
+  border: 1px solid #dbe2ea;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+/* ===== BUTTONS ===== */
+.button-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.btn {
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+/* Primary */
+.btn-primary {
+  background: #2563eb;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+/* Success */
+.btn-success {
+  background: #16a34a;
+  color: white;
+}
+
+.btn-success:hover {
+  background: #15803d;
+}
+
+/* Secondary */
+.btn-secondary {
+  background: #64748b;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #475569;
+}
+
+/* Delete */
+.delete-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 7px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+}
+
+/* ===== TOTAL SECTION ===== */
+.total-box {
+  margin-top: 25px;
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  border: 1px solid #bfdbfe;
+  border-radius: 16px;
+  padding: 20px;
+  text-align: right;
+}
+
+.total-box h3 {
+  color: #1e40af;
+  margin-bottom: 5px;
+}
+
+.total-box h2 {
+  color: #2563eb;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+/* ===== AUTOCOMPLETE ===== */
+.autocomplete-box {
+  position: absolute;
+  width: 100%;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  margin-top: 4px;
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 999;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.autocomplete-item {
+  padding: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.autocomplete-item:hover {
+  background: #eff6ff;
+}
+
+/* ===== STATUS BADGES ===== */
+.badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge-warning {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.badge-danger {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .header {
+    text-align: center;
+  }
+
+  .header h2 {
+    font-size: 24px;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .voucher-card {
+    padding: 18px;
+  }
+}
+
+/* ===== PRINT ===== */
+@media print {
+  body {
+    background: white;
+  }
+
+  .btn,
+  .button-group {
+    display: none;
+  }
+
+  .voucher-card,
+  .header,
+  .total-box {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+}
+.img{
+  height: 25px;
+}

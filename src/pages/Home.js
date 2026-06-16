@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import "./color.css";
+import headerVideo from "../assets/VID-20260612-WA0011 (1).mp4";
+import brandNameLogo from "./images/dharani-herbbals-wordmark.svg";
 
 function Home() {
   const [orderNo, setOrderNo] = useState("");
@@ -43,7 +45,7 @@ function Home() {
   // FETCH ORDERS LIST
   const fetchOrders = () => {
     addLog("Fetching orders list...");
-    fetch("https://ungreased-repulsive-consuming.ngrok-free.dev/herbal/orders/", {
+    fetch("https://api.codingboss.in/herbal/orders/", {
       headers: {
         "ngrok-skip-browser-warning": "any",
       }
@@ -68,7 +70,7 @@ function Home() {
   useEffect(() => {
     addLog("Fetching customers...");
     fetch(
-      "https://ungreased-repulsive-consuming.ngrok-free.dev/herbal/customers/",
+      "https://api.codingboss.in/herbal/customers/",
       {
         headers: {
           "ngrok-skip-browser-warning": "any",
@@ -96,7 +98,7 @@ function Home() {
   useEffect(() => {
     addLog("Fetching products...");
     fetch(
-      "https://ungreased-repulsive-consuming.ngrok-free.dev/herbal/products/",
+      "https://api.codingboss.in/herbal/products/",
       {
         headers: {
           "ngrok-skip-browser-warning": "any",
@@ -199,7 +201,7 @@ function Home() {
     };
 
     addLog("Saving order to database...");
-    fetch("https://ungreased-repulsive-consuming.ngrok-free.dev/herbal/orders/", {
+    fetch("https://api.codingboss.in/herbal/orders/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -275,7 +277,7 @@ function Home() {
   // LOAD ORDER DIRECTLY BY ID
   const loadOrderById = (orderId) => {
     addLog(`Loading details for Order #${orderId}...`);
-    fetch(`https://ungreased-repulsive-consuming.ngrok-free.dev/herbal/orders/${orderId}/`, {
+    fetch(`https://api.codingboss.in/herbal/orders/${orderId}/`, {
       headers: {
         "ngrok-skip-browser-warning": "any",
       }
@@ -468,7 +470,7 @@ function Home() {
     );
     addLog(`Updating status of Order #${orderId} to "${newStatus}"...`);
 
-    fetch(`https://ungreased-repulsive-consuming.ngrok-free.dev/herbal/orders/${orderId}/`, {
+    fetch(`https://api.codingboss.in/herbal/orders/${orderId}/`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -527,7 +529,21 @@ function Home() {
   return (
     <div className="home-container">
       <div className="header">
-        <h2>🛒 HERBBALS ERP</h2>
+        <h2>
+          <video
+            className="brand-video"
+            src={headerVideo}
+            autoPlay
+            muted
+            loop
+            playsInline
+          ></video>
+          <img
+            className="brand-name-logo"
+            src={brandNameLogo}
+            alt="Dharani Herbbals"
+          />
+        </h2>
         <p>Create Order System</p>
       </div>
 
@@ -644,7 +660,7 @@ function Home() {
           </div>
 
           <div>
-            <label>Shipping Address</label>
+            <label>Delivery Address</label>
             <input
               className="input-field"
               value={shippingAddress}
@@ -666,7 +682,7 @@ function Home() {
           </div>
 
           <div>
-            <label>Shipping Charge</label>
+            <label>Delivery Charge</label>
             <input
               type="number"
               className="input-field"
@@ -772,203 +788,164 @@ function Home() {
       </div>
 
       {/* SAVED ORDERS LIST (MATCHING DESIGN SPEC) */}
-      <div className="voucher-card" style={{ marginTop: "30px" }}>
-        <h3 style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <span>📋 Saved Orders List</span>
-          <button
-            onClick={fetchOrders}
-            style={{
-              background: "#6366f1",
-              color: "#ffffff",
-              border: "none",
-              padding: "6px 12px",
-              borderRadius: "8px",
-              fontSize: "12px",
-              fontWeight: "600",
-              cursor: "pointer"
-            }}
-          >
-            🔄 Refresh List
-          </button>
-        </h3>
-        <div className="table-wrapper">
-          <table className="voucher-table" style={{ background: "#ffffff" }}>
-            <thead>
-              <tr style={{ background: "#6366f1" }}>
-                <th style={{ padding: "12px", color: "#ffffff", fontWeight: "600" }}>ORDER ID</th>
-                <th style={{ padding: "12px", color: "#ffffff", fontWeight: "600" }}>CUSTOMER</th>
-                <th style={{ padding: "12px", color: "#ffffff", fontWeight: "600" }}>DATE & TIME</th>
-                <th style={{ padding: "12px", color: "#ffffff", fontWeight: "600" }}>ITEMS</th>
-                <th style={{ padding: "12px", color: "#ffffff", fontWeight: "600" }}>TOTAL</th>
-                <th style={{ padding: "12px", color: "#ffffff", fontWeight: "600" }}>STATUS</th>
-                <th style={{ padding: "12px", color: "#ffffff", fontWeight: "600" }}>ACTION</th>
+     <div className="voucher-card saved-orders-card">
+  <div className="saved-orders-header">
+    <h3>📋 Saved Orders List</h3>
+<button
+  onClick={fetchOrders}
+  style={{
+    background: "#22c55e",
+    color: "white",
+    border: "none",
+    padding: "10px 18px",
+    borderRadius: "10px",
+    cursor: "pointer",
+    fontWeight: "600"
+  }}
+>
+  🔄 Refresh List
+</button>
+  </div>
+
+  <div className="table-wrapper">
+    <table className="voucher-table">
+      <thead>
+        <tr>
+          <th>ORDER ID</th>
+          <th>CUSTOMER</th>
+          <th>DATE & TIME</th>
+          <th>ITEMS</th>
+          <th>TOTAL</th>
+          <th>STATUS</th>
+          <th>ACTION</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {orders.length > 0 ? (
+          orders.map((order, idx) => {
+            const orderId = order.order_id || order.id;
+            const totalAmt = order.total_amount || order.total || "0.00";
+
+            let itemsText = "No items";
+
+            if (
+              Array.isArray(order.items) &&
+              order.items.length > 0
+            ) {
+              itemsText = order.items
+                .map(
+                  (it) =>
+                    it.product || "Unknown Product"
+                )
+                .join(", ");
+            }
+
+            return (
+              <tr key={idx}>
+                <td>
+                  <span className="order-badge">
+                    #{orderId}
+                  </span>
+                </td>
+
+                <td>
+                  <div className="customer-name">
+                    {order.customer}
+                  </div>
+
+                  {order.mobile && (
+                    <div className="customer-mobile">
+                      📞 {order.mobile}
+                    </div>
+                  )}
+                </td>
+
+                <td className="date-cell">
+                  🕒{" "}
+                  {formatDateTime(
+                    order.created_at || order.date
+                  )}
+                </td>
+
+                <td className="items-cell">
+                  📦 {itemsText}
+                </td>
+
+                <td className="amount-cell">
+                  ₹
+                  {Number(totalAmt).toFixed(2)}
+                </td>
+
+                <td>
+                  <select
+                    value={
+                      order.status || "pending"
+                    }
+                    onChange={(e) =>
+                      handleStatusChange(
+                        orderId,
+                        e.target.value
+                      )
+                    }
+                    style={{
+                      ...getStatusStyle(
+                        order.status
+                      ),
+                      padding: "8px 12px",
+                      borderRadius: "20px",
+                      fontWeight: "600",
+                      border: "none",
+                    }}
+                  >
+                    <option value="pending">
+                      Pending
+                    </option>
+                    <option value="confirmed">
+                      Confirmed
+                    </option>
+                    <option value="shipped">
+                      Shipped
+                    </option>
+                    <option value="delivered">
+                      Delivered
+                    </option>
+                  </select>
+                </td>
+
+                <td>
+                  <button
+                    onClick={() =>
+                      printOrderInvoice(order)
+                    }
+                    className="print-btn"
+                  >
+                    🖨️ Print
+                  </button>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {orders.length > 0 ? (
-                orders.map((order, idx) => {
-                  const orderId = order.order_id || order.id;
-                  const totalAmt = order.total_amount || order.total || "0.00";
-                  
-                  // Format items string
-                  let itemsText = "No items";
-                  if (Array.isArray(order.items) && order.items.length > 0) {
-                    itemsText = order.items.map((it) => it.product || "Unknown Product").join(", ");
-                  }
-
-                  return (
-                    <tr key={idx} style={{ borderBottom: "1px solid #f3f4f6" }}>
-                      {/* ORDER ID BADGE */}
-                      <td style={{ padding: "14px 12px" }}>
-                        <span style={{
-                          background: "#eff6ff",
-                          color: "#2563eb",
-                          padding: "6px 12px",
-                          borderRadius: "6px",
-                          fontWeight: "700",
-                          fontSize: "13px"
-                        }}>
-                          #{orderId}
-                        </span>
-                      </td>
-
-                      {/* CUSTOMER NAME AND MOBILE */}
-                      <td style={{ padding: "14px 12px" }}>
-                        <div style={{ fontWeight: "700", color: "#111827" }}>{order.customer}</div>
-                        {order.mobile && (
-                          <div style={{ fontSize: "12px", color: "#6b7280", marginTop: "2px" }}>
-                            📞 {order.mobile}
-                          </div>
-                        )}
-                      </td>
-
-                      {/* DATE & TIME */}
-                      <td style={{ padding: "14px 12px", color: "#4b5563" }}>
-                        <span style={{ fontSize: "13px", display: "flex", alignItems: "center", gap: "6px" }}>
-                          🕒 {formatDateTime(order.created_at || order.date)}
-                        </span>
-                      </td>
-
-                      {/* ITEMS */}
-                      <td style={{ padding: "14px 12px", color: "#4b5563", maxWidth: "250px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                        <span style={{ fontSize: "13px", display: "flex", alignItems: "center", gap: "6px" }}>
-                          📦 {itemsText}
-                        </span>
-                      </td>
-
-                      {/* TOTAL */}
-                      <td style={{ padding: "14px 12px", fontWeight: "700", fontSize: "15px", color: "#111827" }}>
-                        ₹{Number(totalAmt).toFixed(2)}
-                      </td>
-
-                      {/* STATUS DROPDOWN PILL */}
-                      <td style={{ padding: "14px 12px" }}>
-                        <select
-                          value={order.status || "pending"}
-                          onChange={(e) => handleStatusChange(orderId, e.target.value)}
-                          style={{
-                            ...getStatusStyle(order.status),
-                            padding: "6px 10px",
-                            borderRadius: "20px",
-                            fontSize: "13px",
-                            fontWeight: "600",
-                            cursor: "pointer",
-                            outline: "none"
-                          }}
-                        >
-                          <option value="pending">Pending</option>
-                          <option value="confirmed">Confirmed</option>
-                          <option value="shipped">Shipped</option>
-                          <option value="delivered">Delivered</option>
-                        </select>
-                      </td>
-
-                      {/* VIEW / PRINT BUTTON */}
-                      <td style={{ padding: "14px 12px" }}>
-                        <button
-                          onClick={() => printOrderInvoice(order)}
-                          style={{
-                            background: "#e0e7ff",
-                            color: "#4338ca",
-                            border: "none",
-                            padding: "6px 14px",
-                            borderRadius: "8px",
-                            fontWeight: "600",
-                            fontSize: "13px",
-                            cursor: "pointer",
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "4px",
-                            transition: "all 0.2s"
-                          }}
-                          onMouseOver={(e) => {
-                            e.currentTarget.style.background = "#c7d2fe";
-                          }}
-                          onMouseOut={(e) => {
-                            e.currentTarget.style.background = "#e0e7ff";
-                          }}
-                        >
-                          🖨️ Print
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })
-              ) : (
-                <tr>
-                  <td colSpan="7" style={{ textAlign: "center", padding: "20px", color: "#9ca3af" }}>
-                    No saved orders found.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      </div>
+            );
+          })
+        ) : (
+          <tr>
+            <td
+              colSpan="7"
+              style={{
+                textAlign: "center",
+                padding: "20px",
+              }}
+            >
+              No saved orders found.
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+</div>
 
       {/* SYSTEM LOGS */}
-      <div style={{
-        marginTop: "30px",
-        background: "#1e293b",
-        color: "#38bdf8",
-        padding: "16px",
-        borderRadius: "12px",
-        fontFamily: "monospace",
-        fontSize: "12px",
-        boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.3)"
-      }}>
-        <div style={{
-          fontWeight: "bold",
-          borderBottom: "1px solid #334155",
-          paddingBottom: "6px",
-          marginBottom: "8px",
-          color: "#94a3b8",
-          display: "flex",
-          justifyContent: "space-between"
-        }}>
-          <span>💻 System Activity Logs</span>
-          <button
-            onClick={() => setLogs([])}
-            style={{
-              background: "none",
-              border: "none",
-              color: "#f43f5e",
-              cursor: "pointer",
-              fontSize: "11px",
-              fontWeight: "bold"
-            }}
-          >
-            Clear
-          </button>
-        </div>
-        <div style={{ maxHeight: "120px", overflowY: "auto" }}>
-          {logs.length > 0 ? (
-            logs.map((log, i) => <div key={i} style={{ marginBottom: "4px" }}>{log}</div>)
-          ) : (
-            <div style={{ color: "#64748b" }}>No activity yet. Logs will appear here...</div>
-          )}
-        </div>
-      </div>
+     
     </div>
   );
 }
